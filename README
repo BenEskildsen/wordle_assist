@@ -1,0 +1,14 @@
+
+input guesses:
+    s-h+a+r-d
+    where:
+      a letter preceded by a + means it was yellow
+      a letter preceded by a - means it was black
+      a letter without a preceding +/- was green
+    provide each guess as its own argument (Separated by a space)
+
+output:
+    all words in the dictionary that match the given guesses
+
+TODO:
+    - need to filter for yellow letters by position in the word
