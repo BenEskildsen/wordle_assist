@@ -11,9 +11,6 @@ input guesses:
     a letter preceded by a + means it was yellow
     a letter preceded by a - means it was black
     a letter without a preceding +/- was green
-
-    TODO:
-        - need to filter for yellow letters by position in the word
 '''
 
 def init_possible_words():
@@ -27,6 +24,7 @@ def init_possible_words():
 # parse input
 excludes = []
 includes = []
+yellows = [[], [], [], [], []]
 word = '.....'
 for i in range(1, len(sys.argv)):
     guess = sys.argv[i]
@@ -37,6 +35,8 @@ for i in range(1, len(sys.argv)):
         if char == '+':
             if not guess[j+1] in includes:
                 includes.append(guess[j+1])
+            if not guess[j+1] in yellows[l]:
+                yellows[l].append(guess[j+1])
             j += 1
         elif char == '-':
             if not guess[j+1] in excludes:
@@ -51,11 +51,27 @@ for i in range(1, len(sys.argv)):
 
 print('includes:', includes)
 print('excludes:', excludes)
+print('yellows:', yellows)
 print('word base:', word)
 
 possibilities = init_possible_words()
+base_re = [char for char in word]
+for i in range(len(yellows)):
+    pos = yellows[i]
+    if len(pos) == 0 or word[i] != '.':
+        continue
+    exclude = '[^\n'
+    for letter in pos:
+        exclude += letter
+    exclude += ']'
+    base_re[i] = exclude
+
+base_re = ''.join(base_re)
+# print(base_re)
+
 # filter for matching the word base
-possibilities = re.findall(word, '\n'.join(possibilities))
+possibilities = re.findall(base_re, '\n'.join(possibilities))
+# print(possibilities)
 # print(len(possibilities))
 
 # filter for excluding letters
@@ -78,6 +94,6 @@ for p_word in possibilities:
     final_possibilities.append(p_word.strip())
 
 # print(len(final_possibilities))
-print(final_possibilities)
-print('number of matches', len(final_possibilities))
+print('possible matches: ', final_possibilities)
+print('number of matches:', len(final_possibilities))
 

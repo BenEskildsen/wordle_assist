@@ -10,5 +10,3 @@ input guesses:
 output:
     all words in the dictionary that match the given guesses
 
-TODO:
-    - need to filter for yellow letters by position in the word
