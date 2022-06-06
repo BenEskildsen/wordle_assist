@@ -76,9 +76,9 @@ possibilities = re.findall(base_re, '\n'.join(possibilities))
 
 # filter for excluding letters
 reg = '[^'+''.join(excludes) + ']{5}\n'
-possibilities = re.findall(reg, '\n'.join(possibilities))
-# print(len(possibilities))
+possibilities = re.findall(reg, '\n'.join(possibilities) + '\n')
 # print(possibilities)
+# print(len(possibilities))
 
 
 # filter for including letters
