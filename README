@@ -11,5 +11,4 @@ output:
     all words in the dictionary that match the given guesses
 
 TODO:
-  - use real wordle dictionary
 

@@ -1,7 +1,6 @@
 import sys, re
 # word_file = '/usr/share/dict/words'
-# word_file = './internet_dict/en_US.dic'
-word_file = './five_wordles'
+word_file = './dict'
 
 
 '''
